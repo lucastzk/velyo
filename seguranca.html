@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de Segurança da Informação e Proteção de Dados — Velyo</title>
+    <meta name="description" content="Como a Velyo protege as informações e os dados pessoais na sua operação e no seu sistema interno, o Velyo Hub." />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="stylesheet" href="estilo.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap bar">
+        <a href="./" aria-label="Velyo — início"><img class="logo" src="img/velyo-logo.png" alt="Velyo" width="480" height="99" /></a>
+        <nav aria-label="Principal">
+          <a href="privacidade.html">Privacidade</a>
+          <a class="keep" href="./">Início</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap doc">
+      <h1>Política de Segurança da Informação e Proteção de Dados</h1>
+      <p class="updated">Versão 1.0 — 21 de novembro de 2026 · revisão anual ou quando houver mudança relevante</p>
+      <p>
+        <strong>Velyo</strong> — razão social 69.896.741 LUCAS FERREIRA APOLINARIO, CNPJ 69.896.741/0001-07, microempreendedor individual.
+        <a class="text-link no-print" href="docs/politica-de-seguranca-velyo.pdf">Baixar em PDF</a>
+      </p>
+
+      <h2>1. Objetivo e escopo</h2>
+      <p>
+        Esta política define como a Velyo protege as informações da sua operação e os dados que recebe das plataformas onde vende (TikTok Shop,
+        Shopee e Mercado Livre). Vale para o Velyo Hub (sistema interno de gestão), para as contas da Velyo nas plataformas e nos fornecedores de
+        tecnologia, para os computadores e celulares usados na operação e para todas as pessoas autorizadas a acessá-los.
+      </p>
+
+      <h2>2. Papéis e responsabilidades</h2>
+      <ul>
+        <li>
+          <strong>Responsável pela segurança da informação e encarregado de dados:</strong> Lucas Ferreira Apolinario, titular da empresa. Aprova
+          e revoga acessos, coordena a resposta a incidentes e faz as comunicações às plataformas, aos vendedores, à ANPD e aos titulares.
+        </li>
+        <li><strong>Suporte técnico de desenvolvimento:</strong> mantém o Velyo Hub, aplica correções e executa a contenção técnica de incidentes.</li>
+        <li><strong>Pessoas autorizadas:</strong> usam apenas o próprio acesso e seguem esta política.</li>
+        <li>
+          <strong>Fornecedores de infraestrutura</strong> (hospedagem, banco de dados, repositório de código): escolhidos por oferecer
+          criptografia, controle de acesso e autenticação em duas etapas.
+        </li>
+      </ul>
+
+      <h2>3. Classificação dos dados</h2>
+      <ul>
+        <li>
+          <strong>Restrito:</strong> credenciais e segredos (chaves de API, tokens de acesso às plataformas, senhas, chave de criptografia dos
+          backups). Ficam só no servidor ou no gerenciador de senhas, sempre criptografados, e nunca vão para e-mail, chat, código ou registros.
+        </li>
+        <li>
+          <strong>Confidencial:</strong> dados de vendas e financeiros obtidos das plataformas (pedidos, valores, taxas, repasses, devoluções).
+          Acesso só da equipe autorizada, com criptografia em trânsito e em repouso.
+        </li>
+        <li><strong>Interno:</strong> catálogo, custos, configurações do sistema.</li>
+        <li><strong>Público:</strong> o site institucional.</li>
+        <li>
+          <strong>Dados pessoais de compradores:</strong> por minimização, o Velyo Hub <strong>não armazena</strong> nome, endereço, telefone,
+          e-mail, CPF ou dados de pagamento de compradores. Etiquetas de envio são geradas no momento da expedição e não ficam guardadas no
+          sistema.
+        </li>
+      </ul>
+
+      <h2>4. Controle de acesso (privilégio mínimo)</h2>
+      <ul>
+        <li>Contas individuais, sem compartilhamento de senha. Novas contas só por convite do responsável (o cadastro público é bloqueado); o convite vale 72 horas e uma única vez.</li>
+        <li>Autenticação em duas etapas obrigatória no Velyo Hub e em todas as contas da operação (plataformas, repositório de código, hospedagem e domínio).</li>
+        <li>Perfis com o mínimo necessário: <em>dono</em> (gestão completa) e <em>operador</em> (vê e lança dados, mas não muda configurações, integrações nem usuários).</li>
+        <li>Isolamento no banco de dados por loja (Row Level Security): cada pessoa só acessa os dados da própria loja. Tokens e segredos não são legíveis por nenhum usuário — só pelo servidor.</li>
+        <li>Acesso ao servidor somente por chave SSH; o processo de backup usa um usuário de banco somente leitura.</li>
+        <li>Revisão dos acessos a cada 3 meses e remoção imediata quando alguém deixa de precisar.</li>
+      </ul>
+
+      <h2>5. Criptografia</h2>
+      <ul>
+        <li><strong>Em trânsito:</strong> HTTPS/TLS em todas as conexões (site, sistema, APIs das plataformas e banco de dados), com HSTS.</li>
+        <li>
+          <strong>Em repouso:</strong> tokens de acesso às plataformas criptografados na aplicação com AES-256-GCM (chave guardada fora do banco);
+          banco de dados com criptografia de disco do provedor; backups diários criptografados com AES-256 no momento em que são gerados,
+          guardados por 30 dias e com restauração testada.
+        </li>
+      </ul>
+
+      <h2>6. Segurança da rede e do sistema</h2>
+      <ul>
+        <li>Produção separada do desenvolvimento: bancos, chaves e contas diferentes; dados reais só em produção.</li>
+        <li>No Velyo Hub, só ficam públicas as rotas de retorno da autorização e de webhooks (com verificação de assinatura). Todo o resto exige login e verificação em duas etapas; com a configuração de segurança incompleta, o sistema se recusa a funcionar.</li>
+        <li>Limite de requisições por endereço IP nas rotas públicas e no login, com bloqueio após falhas repetidas de autenticação.</li>
+        <li>Cabeçalhos de segurança (política de conteúdo com nonce, HSTS, bloqueio de incorporação em outros sites) e nenhuma mensagem técnica de erro exposta ao público.</li>
+        <li>Servidor de produção com firewall liberando apenas HTTPS e SSH por chave, e atualizações de segurança automáticas.</li>
+        <li>Registros das sincronizações e das falhas, com alertas para o responsável.</li>
+      </ul>
+
+      <h2>7. Linha de base de segurança no dia a dia</h2>
+      <ul>
+        <li>Autenticação em duas etapas em todas as contas da operação.</li>
+        <li>Senhas fortes e únicas (mínimo de 12 caracteres no Velyo Hub), guardadas em gerenciador de senhas; nunca anotadas em papel nem enviadas por chat.</li>
+        <li>Bloqueio automático de tela em até 5 minutos nos computadores e celulares usados na operação.</li>
+        <li>Antivírus ativo e atualizado nos computadores da operação; sistema operacional e navegador sempre atualizados.</li>
+        <li>Mesa limpa: etiquetas e documentos com dados de compradores ficam só o tempo necessário para o envio; sobras e impressões com erro são destruídas.</li>
+        <li>Rede Wi-Fi protegida por senha (WPA2 ou superior); o sistema não é acessado de computadores públicos.</li>
+      </ul>
+
+      <h2>8. Gestão de vulnerabilidades e ameaças</h2>
+      <ul>
+        <li>Alertas automáticos de vulnerabilidades nas bibliotecas do sistema (GitHub Dependabot), avaliados toda semana.</li>
+        <li>Prazos de correção: vulnerabilidades críticas em até 7 dias; altas em até 30 dias; demais na próxima atualização.</li>
+        <li>Testes automáticos a cada mudança no código, antes de publicar, e lista de verificação de segurança antes de cada publicação.</li>
+        <li>Atualizações de segurança do sistema operacional do servidor aplicadas automaticamente.</li>
+        <li>Troca imediata de senhas, chaves e tokens quando houver qualquer suspeita de exposição.</li>
+      </ul>
+
+      <h2>9. Resposta a incidentes</h2>
+      <p>
+        Incidente é qualquer acesso indevido, vazamento, perda ou roubo de dispositivo, credencial exposta ou indisponibilidade relevante que
+        afete dados ou sistemas da Velyo.
+      </p>
+      <ul>
+        <li><strong>Coordenação:</strong> o responsável pela segurança (seção 2); a execução técnica fica com o suporte de desenvolvimento.</li>
+        <li>
+          <strong>Etapas:</strong> (1) detectar e registrar; (2) conter — revogar tokens, desconectar integrações, trocar senhas e chaves,
+          bloquear acessos; (3) investigar a causa e os dados afetados; (4) corrigir e restaurar a partir de backups testados; (5) comunicar;
+          (6) registrar as lições aprendidas e ajustar esta política.
+        </li>
+        <li>
+          <strong>Comunicação:</strong> as plataformas parceiras (TikTok Shop, Shopee, Mercado Livre) e os vendedores afetados são avisados em até
+          24 horas após a confirmação de um incidente que envolva dados obtidos delas; a ANPD e os titulares, quando houver risco ou dano
+          relevante, no prazo da regulamentação (Resolução CD/ANPD nº 15/2024).
+        </li>
+        <li>
+          <strong>Canais:</strong> para relatar um incidente ou uma vulnerabilidade, fale com a Velyo pelo chat das suas lojas no TikTok Shop, na
+          Shopee ou no Mercado Livre; as plataformas parceiras usam o contato do encarregado informado no cadastro.
+        </li>
+        <li>Os registros de incidentes são guardados por pelo menos 5 anos.</li>
+      </ul>
+
+      <h2>10. Proteção de dados pessoais (LGPD)</h2>
+      <ul>
+        <li><strong>Minimização e finalidade:</strong> tratamos apenas os dados necessários para gerir as vendas da própria Velyo (lucro, repasses, devoluções e catálogo), e não os usamos para publicidade nem para criar perfis.</li>
+        <li><strong>Direitos dos titulares:</strong> pedidos de acesso, correção ou exclusão são atendidos em até 15 dias, inclusive quando chegam pelas plataformas ou pelos vendedores.</li>
+        <li><strong>Compartilhamento:</strong> não vendemos nem compartilhamos dados; os fornecedores de infraestrutura apenas os armazenam e processam em nosso nome.</li>
+        <li><strong>Localização:</strong> servidor e banco de dados no Brasil; cópias de backup criptografadas no GitHub (Estados Unidos).</li>
+        <li>
+          <strong>Retenção e exclusão:</strong> dados de vendas ficam enquanto a loja estiver ativa e pelo prazo das obrigações contábeis e
+          fiscais. Ao desconectar uma plataforma, os tokens de acesso são apagados na hora; ao encerrar a integração, os dados obtidos por ela
+          são excluídos em até 30 dias, inclusive dos backups (que expiram em 30 dias), mantendo apenas o mínimo exigido por lei.
+        </li>
+        <li>A <a href="privacidade.html">Política de Privacidade</a> pública complementa esta seção.</li>
+      </ul>
+
+      <h2>11. Revisão</h2>
+      <p>Esta política é revisada pelo responsável pelo menos uma vez por ano, depois de qualquer incidente e sempre que o sistema ou a operação mudarem de forma relevante.</p>
+    </main>
+
+    <footer>
+      <div class="wrap row">
+        <span>© 2026 Velyo · 69.896.741 LUCAS FERREIRA APOLINARIO · CNPJ 69.896.741/0001-07</span>
+        <span><a href="privacidade.html">Privacidade</a> · <a href="./">Início</a></span>
+      </div>
+    </footer>
+  </body>
+</html>
